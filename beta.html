@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .textcontainer {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            /* Stack items vertically */
+            align-items: center;
+            /* Center items horizontally */
+            margin-top: 20px;
+            /* Add spacing between images */
+        }
+
+        .topText {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: larger;
+            color: white;
+            background-color: black;
+
+        }
+
+        .bottomText {
+            position: absolute;
+            text-align: center;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 1rem;
+            font-size: larger;
+            color: white;
+            background-color: black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input type="text" placeholder="Top Text" id="top">
+        <input type="text" placeholder="Bottom Text" id="bottom">
+        <input type="url" placeholder="Image Url" id="imgURL">
+        <input type="submit">
+    </form>
+    
+        <div id="container">
+        </div>
+    
+    <script>
+        const form = document.querySelector('form');
+        const container = document.getElementById('container');
+        let imageCount = 0;
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const textContainer = document.createElement('div');
+            textContainer.setAttribute('class', 'textContainer');
+            container.appendChild(textContainer);
+
+            const imgURLInput = document.getElementById("imgURL");
+            const imgURL = imgURLInput.value;
+
+            const img = document.createElement('img');
+            img.setAttribute('src', imgURL);
+            textContainer.appendChild(img);
+
+            const topText = document.createElement('span');
+            topText.innerText = document.getElementById('top').value;
+            topText.setAttribute('class', 'topText');
+            textContainer.appendChild(topText);
+
+            const bottomText = document.createElement('span');
+            bottomText.innerText = document.getElementById('bottom').value;
+            bottomText.setAttribute('class', 'bottomText');
+            textContainer.appendChild(bottomText);
+
+            imageCount++;
+            textContainer.style.order = imageCount;
+
+            imgURLInput.value = '';
+        });
+
+    </script>
+</body>
+
+</html>

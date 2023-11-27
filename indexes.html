@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .textContainer {
+            position: relative;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .topText,
+        .bottomText {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: white;
+            text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+        }
+
+        .topText {
+            top: .5rem;
+        }
+
+        .bottomText {
+            bottom: .5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input type="text" placeholder="Top Text" id="top">
+        <input type="text" placeholder="Bottom Text" id="bottom">
+        <input type="url" placeholder="Image Url" id="imgURL">
+        <input type="submit">
+    </form>
+    <div id="container"></div>
+    <script>
+        const form = document.querySelector('form');
+        const container = document.getElementById('container');
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const imgURLInput = document.getElementById("imgURL");
+            const imgURL = imgURLInput.value;
+
+            const textContainer = document.createElement('div');
+            textContainer.setAttribute('class', 'textContainer');
+            container.appendChild(textContainer);
+
+            const img = document.createElement('img');
+            img.setAttribute('src', imgURL);
+            textContainer.appendChild(img);
+
+            const topText = document.createElement('span');
+            topText.innerText = document.getElementById('top').value;
+            topText.setAttribute('class', 'topText');
+            img.parentNode.insertBefore(topText, img.nextSibling);
+
+            const bottomText = document.createElement('span');
+            bottomText.innerText = document.getElementById('bottom').value;
+            bottomText.setAttribute('class', 'bottomText');
+            img.parentNode.insertBefore(bottomText, img.nextSibling);
+
+            imgURLInput.value = '';
+        });
+
+    </script>
+</body>
+
+</html>
